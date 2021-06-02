@@ -1,0 +1,92 @@
+<template>
+  <div class="container">
+    <Loader v-if="loading" />
+    <div v-else>
+      <h2>{{ planet.name }}</h2>
+      <table>
+        <tbody>
+          <tr>
+            <td>Период вращения</td>
+            <td>{{ planet.rotation_period }}</td>
+          </tr>
+          <tr>
+            <td>Орбитальный период</td>
+            <td>{{ planet.orbital_period }}</td>
+          </tr>
+          <tr>
+            <td>Диаметр</td>
+            <td>{{ planet.diameter }}</td>
+          </tr>
+          <tr>
+            <td>Климат</td>
+            <td>{{ planet.climate }}</td>
+          </tr>
+          <tr>
+            <td>Гравитация</td>
+            <td>{{ planet.terrain }}</td>
+          </tr>
+          <tr>
+            <td>Поверзность воды</td>
+            <td>{{ planet.surface_water }}</td>
+          </tr>
+          <tr>
+            <td>Население</td>
+            <td>{{ planet.population }}</td>
+          </tr>
+          <tr>
+            <td>Жители</td>
+            <td>
+              <p v-for="man in planet.residents" :key="man">{{ man }}</p>
+            </td>
+          </tr>
+          <tr>
+            <td>Фильмы</td>
+            <td>
+              <p v-for="film in planet.films" :key="film">{{ film }}</p>
+            </td>
+          </tr>
+          <tr>
+            <td>Добавлено</td>
+            <td>{{ planet.created | dateFilter("datetime") }}</td>
+          </tr>
+          <tr>
+            <td>Обновлено</td>
+            <td>{{ planet.edited | dateFilter("datetime") }}</td>
+          </tr>
+          <tr>
+            <td>Ссылка</td>
+            <td>{{ planet.url }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</template>
+<style scoped>
+.container {
+  height: 100vh;
+}
+</style>
+<script>
+export default {
+  name: "PlanetDetail",
+  props: ["id"],
+  data() {
+    return {
+      planet: null,
+      loading: true,
+    };
+  },
+  async mounted() {
+    await this.getPlanet();
+  },
+  methods: {
+    async getPlanet() {
+      let url = this.$store.getters.url + `planets/${this.id}/`;
+      let response = await fetch(url);
+      this.planet = await response.json();
+      this.loading = false;
+    },
+  },
+};
+</script>

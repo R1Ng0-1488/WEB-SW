@@ -4,8 +4,13 @@ import Vuex from "vuex";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  state: {},
+  state: {
+    url: "https://swapi.dev/api/",
+  },
   mutations: {},
   actions: {},
+  getters: {
+    url: (s) => s.url,
+  },
   modules: {},
 });
