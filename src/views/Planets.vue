@@ -3,7 +3,7 @@
     <Loader v-if="loading" />
     <div v-else>
       <h2>Планеты вселенной Star Wars</h2>
-      <p v-for="planet in planets" :key="planet.name" @click="goTo(planet.id)">
+      <p v-for="planet in allItems" :key="planet.name" @click="goTo(planet.id)">
         {{ planet.name }}
       </p>
       <Paginate
@@ -13,7 +13,7 @@
         :prev-text="'Prev'"
         :next-text="'Next'"
         :container-class="'pagination'"
-        :active-class="'waves-effect indigo lighten-4'"
+        :active-class="'waves-effect amber lighten-2'"
         :page-class="'waves-effect'"
       />
     </div>
@@ -24,49 +24,31 @@ p {
   cursor: pointer;
 }
 .container {
-  height: 100vh;
+  min-height: 100vh;
 }
 </style>
 <script>
+import paginationMixin from "@/mixins/pagination.mixin";
 export default {
   name: "Planets",
+  mixins: [paginationMixin],
   data() {
     return {
-      page: +this.$route.query.page || 1,
-      pageCount: 0,
-      planets: null,
       loading: true,
     };
   },
   async mounted() {
-    await this.getPlanets();
+    await this.setupPagination(await this.getObj());
+    this.loading = false;
   },
   methods: {
-    async getPlanets() {
-      const url = this.$store.getters.url + `planets?page=${this.page}`;
+    async getObj() {
+      const url = this.$store.getters.url + `planets/?page=${this.page}`;
       const response = await fetch(url);
-      let obj = await response.json();
-      this.planets = obj.results.map((e) => {
-        e.id =
-          obj.results.indexOf(e) + (this.page - 1) * obj.results.length + 1;
-        return e;
-      });
-      this.loading = false;
-      this.pageCount = this.getPageCount(obj);
-    },
-    async pageChangeHandler(page) {
-      await this.getPlanets();
-      this.$router.push(`${this.$route.path}?page=${page}`);
-      this.page = page;
+      return await response.json();
     },
     goTo(id) {
       this.$router.push({ name: "PlanetDetail", params: { id } });
-    },
-    getPageCount(obj) {
-      let realPageCount = obj.count / obj.results.length;
-      return realPageCount > Math.floor(realPageCount)
-        ? Math.floor(realPageCount) + 1
-        : Math.floor(realPageCount);
     },
   },
 };
