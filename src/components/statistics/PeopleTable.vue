@@ -49,47 +49,20 @@
 </template>
 
 <script>
-import { Bar } from "vue-chartjs";
 import paginationMixin from "@/mixins/pagination.mixin";
+import tableMixin from "@/mixins/table.mixin";
 export default {
   name: "PeopleTable",
   data() {
     return {
-
+      table: 'people',
+      name: 'name',
+      dataset: [
+        {label: 'Вес', data: 'mass', width: 1},
+        {label: 'Рост', data: 'height', width: 2}
+      ]
     };
   },
-  extends: Bar,
-  mixins: [paginationMixin],
-  async mounted() {
-    await this.setupPagination(await this.getObj());
-    this.chart()
-  },
-  methods: {
-    async getObj() {
-      const response = await fetch(
-        this.$store.getters.url + `people/?page=${this.page}`
-      );
-      return await response.json();
-    },
-    chart() {
-    return this.renderChart({
-        labels: this.allItems.map(e => e.name), 
-        datasets: [{
-            label: 'Вес',
-            data: this.allItems.map(e => +e.mass),
-            backgroundColor: this.backgroundColor,
-            borderColor: this.borderColor,
-            borderWidth: 1
-        },
-        {
-            label: 'Рост',
-            data: this.allItems.map(e => +e.height),
-            backgroundColor: this.backgroundColor,
-            borderColor: this.borderColor,
-            borderWidth: 2,
-        }]
-    })
-    }
-  },
+  mixins: [paginationMixin, tableMixin],
 };
 </script>

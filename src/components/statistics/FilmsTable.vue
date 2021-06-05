@@ -44,62 +44,19 @@
 </template>
 
 <script>
-import { Bar } from "vue-chartjs";
 import paginationMixin from "@/mixins/pagination.mixin";
+import tableMixin from "@/mixins/table.mixin";
 export default {
-  name: "FilmssTable",
+  name: "FilmsTable",
   data() {
     return {
-
+      table: 'films',
+      name: 'title',
+      dataset: [
+        {label: 'Эпизод', data: 'episode_id', width: 1},
+      ]
     };
   },
-  extends: Bar,
-  mixins: [paginationMixin],
-  async mounted() {
-    await this.setupPagination(await this.getObj());
-    this.chart()
-  },
-  methods: {
-    async getObj() {
-      const response = await fetch(
-        this.$store.getters.url + `films/?page=${this.page}`
-      );
-      return await response.json();
-    },
-    chart() {
-    return this.renderChart({
-        labels: this.allItems.map(e => e.title), 
-        datasets: [{
-            label: 'Эпизод',
-            data: this.allItems.map(e => +e.episode_id),
-            backgroundColor: [
-              "rgba(255, 99, 132, 0.2)",
-              "rgba(54, 162, 235, 0.2)",
-              "rgba(255, 206, 86, 0.2)",
-              "rgba(75, 192, 192, 0.2)",
-              "rgba(153, 102, 255, 0.2)",
-              "rgba(255, 159, 64, 0.2)",
-              "rgba(88, 242, 17, 0.2)",
-              "rgba(242, 85, 17, 0.2)",
-              "rgba(242, 27, 206, 0.2)",
-              "rgba(27, 242, 178, 0.2)",
-            ],
-            borderColor: [
-              "rgba(255, 99, 132, 1)",
-              "rgba(54, 162, 235, 1)",
-              "rgba(255, 206, 86, 1)",
-              "rgba(75, 192, 192, 1)",
-              "rgba(153, 102, 255, 1)",
-              "rgba(255, 159, 64, 1)",
-              "rgba(88, 242, 17, 1)",
-              "rgba(242, 85, 17, 1)",
-              "rgba(242, 27, 206, 1)",
-              "rgba(27, 242, 178, 1)",
-            ],
-            borderWidth: 1
-        }]
-    })
-    }
-  },
+  mixins: [paginationMixin, tableMixin],
 };
 </script>

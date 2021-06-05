@@ -1,7 +1,5 @@
 <template>
-  <div >
-    <Loader v-if="loading" />
-  <div >
+  <div>
     <h1>Транспортные Средства</h1>
   	<canvas ref="canvas"></canvas>
     <table>
@@ -52,212 +50,28 @@
       :page-class="'waves-effect'"
     />
   </div>
-  </div>
 </template>
 
 <script>
-import { Bar } from "vue-chartjs";
 import paginationMixin from "@/mixins/pagination.mixin";
+import tableMixin from "@/mixins/table.mixin";
 export default {
   name: "VehiclesTable",
   data() {
     return {
-      loading: true
+      table: 'vehicles',
+      name: 'name',
+      dataset: [
+        {label: 'Цена в кредитах', data: 'cost_in_credits', width: 1},
+        {label: 'Длина', data: 'length', width: 2},
+        {label: 'Максимальная атмосферная скорость', data: 'max_atmosphering_speed', width: 1},
+        {label: 'Экипаж', data: 'crew', width: 2},
+        {label: 'Пассажиры', data: 'passengers', width: 2},
+        {label: 'Грузоподъемность', data: 'cargo_capacity', width: 1},
+      ],
+
     };
   },
-  extends: Bar,
-  mixins: [paginationMixin],
-  async mounted() {
-    await this.setupPagination(await this.getObj());
-    this.loading = false
-    this.chart()
-  },
-  methods: {
-    async getObj() {
-      const response = await fetch(
-        this.$store.getters.url + `vehicles/?page=${this.page}`
-      );
-      return await response.json();
-    },
-    chart() {
-    return this.renderChart({
-        labels: this.allItems.map(e => e.name), 
-        datasets: [{
-            label: 'Цена в кредитах',
-            data: this.allItems.map(e => +e.cost_in_credits),
-            backgroundColor: [
-              "rgba(255, 99, 132, 0.2)",
-	            "rgba(54, 162, 235, 0.2)",
-	            "rgba(255, 206, 86, 0.2)",
-	            "rgba(75, 192, 192, 0.2)",
-	            "rgba(153, 102, 255, 0.2)",
-	            "rgba(255, 159, 64, 0.2)",
-	            "rgba(88, 242, 17, 0.2)",
-	            "rgba(242, 85, 17, 0.2)",
-	            "rgba(242, 27, 206, 0.2)",
-	            "rgba(27, 242, 178, 0.2)",
-            ],
-            borderColor: [
-                "rgba(255, 99, 132, 1)",
-	            "rgba(54, 162, 235, 1)",
-	            "rgba(255, 206, 86, 1)",
-	            "rgba(75, 192, 192, 1)",
-	            "rgba(153, 102, 255, 1)",
-	            "rgba(255, 159, 64, 1)",
-	            "rgba(88, 242, 17, 1)",
-	            "rgba(242, 85, 17, 1)",
-	            "rgba(242, 27, 206, 1)",
-	            "rgba(27, 242, 178, 1)",
-            ],
-            borderWidth: 1
-        },
-        {
-            label: 'Длина',
-            data: this.allItems.map(e => +e.length),
-            backgroundColor: [
-                "rgba(255, 99, 132, 0.2)",
-	            "rgba(54, 162, 235, 0.2)",
-	            "rgba(255, 206, 86, 0.2)",
-	            "rgba(75, 192, 192, 0.2)",
-	            "rgba(153, 102, 255, 0.2)",
-	            "rgba(255, 159, 64, 0.2)",
-	            "rgba(88, 242, 17, 0.2)",
-	            "rgba(242, 85, 17, 0.2)",
-	            "rgba(242, 27, 206, 0.2)",
-	            "rgba(27, 242, 178, 0.2)",
-            ],
-            borderColor: [
-                "rgba(255, 99, 132, 1)",
-	            "rgba(54, 162, 235, 1)",
-	            "rgba(255, 206, 86, 1)",
-	            "rgba(75, 192, 192, 1)",
-	            "rgba(153, 102, 255, 1)",
-	            "rgba(255, 159, 64, 1)",
-	            "rgba(88, 242, 17, 1)",
-	            "rgba(242, 85, 17, 1)",
-	            "rgba(242, 27, 206, 1)",
-	            "rgba(27, 242, 178, 1)",
-            ],
-            borderWidth: 2,
-        },
-        {
-            label: 'Максимальная атмосферная скорость',
-            data: this.allItems.map(e => +e.max_atmosphering_speed),
-            backgroundColor: [
-              "rgba(255, 99, 132, 0.2)",
-              "rgba(54, 162, 235, 0.2)",
-              "rgba(255, 206, 86, 0.2)",
-              "rgba(75, 192, 192, 0.2)",
-              "rgba(153, 102, 255, 0.2)",
-              "rgba(255, 159, 64, 0.2)",
-              "rgba(88, 242, 17, 0.2)",
-              "rgba(242, 85, 17, 0.2)",
-              "rgba(242, 27, 206, 0.2)",
-              "rgba(27, 242, 178, 0.2)",
-            ],
-            borderColor: [
-              "rgba(255, 99, 132, 1)",
-              "rgba(54, 162, 235, 1)",
-              "rgba(255, 206, 86, 1)",
-              "rgba(75, 192, 192, 1)",
-              "rgba(153, 102, 255, 1)",
-              "rgba(255, 159, 64, 1)",
-              "rgba(88, 242, 17, 1)",
-              "rgba(242, 85, 17, 1)",
-              "rgba(242, 27, 206, 1)",
-              "rgba(27, 242, 178, 1)",
-            ],
-            borderWidth: 2,
-        },
-        {
-            label: 'Экипаж',
-            data: this.allItems.map(e => +e.crew),
-            backgroundColor: [
-              "rgba(255, 99, 132, 0.2)",
-              "rgba(54, 162, 235, 0.2)",
-              "rgba(255, 206, 86, 0.2)",
-              "rgba(75, 192, 192, 0.2)",
-              "rgba(153, 102, 255, 0.2)",
-              "rgba(255, 159, 64, 0.2)",
-              "rgba(88, 242, 17, 0.2)",
-              "rgba(242, 85, 17, 0.2)",
-              "rgba(242, 27, 206, 0.2)",
-              "rgba(27, 242, 178, 0.2)",
-            ],
-            borderColor: [
-              "rgba(255, 99, 132, 1)",
-              "rgba(54, 162, 235, 1)",
-              "rgba(255, 206, 86, 1)",
-              "rgba(75, 192, 192, 1)",
-              "rgba(153, 102, 255, 1)",
-              "rgba(255, 159, 64, 1)",
-              "rgba(88, 242, 17, 1)",
-              "rgba(242, 85, 17, 1)",
-              "rgba(242, 27, 206, 1)",
-              "rgba(27, 242, 178, 1)",
-            ],
-            borderWidth: 2,
-        },
-        {
-            label: 'Пассажиры',
-            data: this.allItems.map(e => +e.passengers),
-            backgroundColor: [
-              "rgba(255, 99, 132, 0.2)",
-              "rgba(54, 162, 235, 0.2)",
-              "rgba(255, 206, 86, 0.2)",
-              "rgba(75, 192, 192, 0.2)",
-              "rgba(153, 102, 255, 0.2)",
-              "rgba(255, 159, 64, 0.2)",
-              "rgba(88, 242, 17, 0.2)",
-              "rgba(242, 85, 17, 0.2)",
-              "rgba(242, 27, 206, 0.2)",
-              "rgba(27, 242, 178, 0.2)",
-            ],
-            borderColor: [
-              "rgba(255, 99, 132, 1)",
-              "rgba(54, 162, 235, 1)",
-              "rgba(255, 206, 86, 1)",
-              "rgba(75, 192, 192, 1)",
-              "rgba(153, 102, 255, 1)",
-              "rgba(255, 159, 64, 1)",
-              "rgba(88, 242, 17, 1)",
-              "rgba(242, 85, 17, 1)",
-              "rgba(242, 27, 206, 1)",
-              "rgba(27, 242, 178, 1)",
-            ],
-            borderWidth: 2,
-        },
-        {
-            label: 'Грузоподьемность',
-            data: this.allItems.map(e => +e.cargo_capacity),
-            backgroundColor: [
-              "rgba(255, 99, 132, 0.2)",
-              "rgba(54, 162, 235, 0.2)",
-              "rgba(255, 206, 86, 0.2)",
-              "rgba(75, 192, 192, 0.2)",
-              "rgba(153, 102, 255, 0.2)",
-              "rgba(255, 159, 64, 0.2)",
-              "rgba(88, 242, 17, 0.2)",
-              "rgba(242, 85, 17, 0.2)",
-              "rgba(242, 27, 206, 0.2)",
-              "rgba(27, 242, 178, 0.2)",
-            ],
-            borderColor: [
-              "rgba(255, 99, 132, 1)",
-              "rgba(54, 162, 235, 1)",
-              "rgba(255, 206, 86, 1)",
-              "rgba(75, 192, 192, 1)",
-              "rgba(153, 102, 255, 1)",
-              "rgba(255, 159, 64, 1)",
-              "rgba(88, 242, 17, 1)",
-              "rgba(242, 85, 17, 1)",
-              "rgba(242, 27, 206, 1)",
-              "rgba(27, 242, 178, 1)",
-            ],
-            borderWidth: 2,
-        }]
-    })
-    }
-  },
+  mixins: [paginationMixin, tableMixin],
 };
 </script>
