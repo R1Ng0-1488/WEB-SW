@@ -28,6 +28,11 @@ p {
 import paginationMixin from "@/mixins/pagination.mixin";
 export default {
   name: "Planets",
+  metaInfo() {
+    return {
+      title: "Planets",
+    };
+  },
   mixins: [paginationMixin],
   data() {
     return {

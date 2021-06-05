@@ -28,7 +28,7 @@ export default {
   name: "Statistics",
   metaInfo() {
     return {
-      title: "Statistics228",
+      title: "Statistics",
     };
   },
   data() {
@@ -78,7 +78,6 @@ export default {
     setActive(value) {
       this.active = value;
       if (this.$route.query.page) {
-        console.log("aaa");
         this.$router.replace({ name: "Statistics" });
       }
     },

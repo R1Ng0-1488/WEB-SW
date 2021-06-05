@@ -65,6 +65,11 @@
 <script>
 export default {
   name: "PlanetDetail",
+  metaInfo() {
+    return {
+      title: this.getTitle(),
+    };
+  },
   props: ["id"],
   data() {
     return {
@@ -94,6 +99,11 @@ export default {
           .then((data) => arr.push(data))
       );
       return arr;
+    },
+    getTitle() {
+      if (this.planet) {
+        return `Planet - ${this.planet.name}`;
+      }
     },
   },
 };
