@@ -3,12 +3,11 @@
     <Loader v-if="loading" />
     <div v-else>
      <div class="row">
-     	<div v-for="name in component_names" :key="name" class="col s2 m-2">
-    		<a  @click="setActive(name.value)" class="btn waves-effect amber lighten-2 top-0 bottom-10">{{ name.name }}</a>
+     	<div v-for="name in component_names" :key="name" class="col s2">
+    		<a  @click="setActive(name.value)" class="btn waves-effect amber lighten-2 col s12">{{ name.name }}</a>
      	</div>
      </div>
-	
-        
+
     <component :is="active"></component>
     </div>
   </div>

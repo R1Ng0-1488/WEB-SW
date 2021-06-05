@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div class="row">
     <h1>Звездолёты</h1>
   	<canvas ref="canvas"></canvas>
-    <table>
+    <table class="col">
       <thead>
         <tr>
           <th>Имя</th>
@@ -24,7 +24,7 @@
         </tr>
       </thead>
 
-      <tbody class="container">
+      <tbody>
         <tr v-for="starship in allItems" :key="starship">
           <td>{{ starship.name }}</td>
           <td>{{ starship.model }}</td>

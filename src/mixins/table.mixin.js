@@ -36,17 +36,21 @@ export default {
 	methods: {
 	    chart() {
 	      return this.renderChart({
-            labels: this.allItems.map(e => e[this.name]), 
+            labels: this.allItems.map(e => e[this.name]),
+            // xLabels: [1, 2, 3, 4, 5, 6,7,8,9, 19], 
             datasets: this.dataset.map(elem => {
             	return {
             		label: elem.label,
-	                data: this.allItems.map(e => +e[elem.data]),
+	                data: this.allItems.map(e => elem.data === 'episode_id' ? +e[elem.data] : this.getInt(e[elem.data])),
 	                backgroundColor: this.backgroundColor,
 	                borderColor: this.borderColor,
 	                borderWidth: elem.width
             	}
             })
           })
+	    },
+	    getInt(e) {
+	    	return +e.replace(',', '').split('-')[0]
 	    },
 	    async getObj() {
 	      const response = await fetch(

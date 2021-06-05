@@ -12,7 +12,7 @@ export default {
       this.pageCount = this.getPageCount(obj);
     },
     getPageCount(obj) {
-      let realPageCount = obj.count / obj.results.length;
+      let realPageCount = obj.count / 10;
       return realPageCount > Math.floor(realPageCount)
         ? Math.floor(realPageCount) + 1
         : Math.floor(realPageCount);
