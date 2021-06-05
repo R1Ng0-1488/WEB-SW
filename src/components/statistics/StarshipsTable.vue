@@ -1,7 +1,7 @@
 <template>
   <div class="row">
     <h1>Звездолёты</h1>
-  	<canvas ref="canvas"></canvas>
+    <canvas ref="canvas"></canvas>
     <table class="col">
       <thead>
         <tr>
@@ -39,7 +39,7 @@
           <td>{{ starship.hyperdrive_rating }}</td>
           <td>{{ starship.MGLT }}</td>
           <td>{{ starship.starship_class }}</td>
-    
+
           <td>{{ starship.created | dateFilter("date") }}</td>
           <td>{{ starship.edited | dateFilter("date") }}</td>
         </tr>
@@ -65,18 +65,26 @@ export default {
   name: "StarshipsTable",
   data() {
     return {
-      table: 'starships',
-      name: 'name',
+      table: "starships",
+      name: "name",
       dataset: [
-        {label: 'Цена в кредитах', data: 'cost_in_credits', width: 1},
-        {label: 'Длина', data: 'length', width: 2},
-        {label: 'Максимальная атмосферная скорость', data: 'max_atmosphering_speed', width: 1},
-        {label: 'Экипаж', data: 'crew', width: 2},
-        {label: 'Пассажиры', data: 'passengers', width: 2},
-        {label: 'Грузоподъемность', data: 'cargo_capacity', width: 1},
-        {label: 'Рейтинг гипердвигателя', data: 'hyperdrive_rating', width: 2},
-        {label: 'MGLT', data: 'MGLT', width: 2},
-      ]
+        { label: "Цена в кредитах", data: "cost_in_credits", width: 1 },
+        { label: "Длина", data: "length", width: 2 },
+        {
+          label: "Максимальная атмосферная скорость",
+          data: "max_atmosphering_speed",
+          width: 1,
+        },
+        { label: "Экипаж", data: "crew", width: 2 },
+        { label: "Пассажиры", data: "passengers", width: 2 },
+        { label: "Грузоподъемность", data: "cargo_capacity", width: 1 },
+        {
+          label: "Рейтинг гипердвигателя",
+          data: "hyperdrive_rating",
+          width: 2,
+        },
+        { label: "MGLT", data: "MGLT", width: 2 },
+      ],
     };
   },
   mixins: [paginationMixin, tableMixin],

@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container height">
     <Loader v-if="loading" />
     <div v-else>
       <h2>Планеты вселенной Star Wars</h2>
@@ -22,9 +22,6 @@
 <style scoped>
 p {
   cursor: pointer;
-}
-.container {
-  min-height: 100vh;
 }
 </style>
 <script>

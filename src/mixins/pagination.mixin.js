@@ -23,13 +23,13 @@ export default {
           obj.results.indexOf(e) + (this.page - 1) * obj.results.length + 1;
         return e;
       });
-      return items
+      return items;
     },
     async pageChangeHandler(page) {
       this.page = page;
       this.allItems = await this.getItems(await this.getObj());
       if (this.chart) {
-        this.chart()
+        this.chart();
       }
       this.$router.push(`${this.$route.path}?page=${page}`);
     },

@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Люди</h1>
-  	<canvas ref="canvas"></canvas>
+    <canvas ref="canvas"></canvas>
     <table>
       <thead>
         <tr>
@@ -55,12 +55,12 @@ export default {
   name: "PeopleTable",
   data() {
     return {
-      table: 'people',
-      name: 'name',
+      table: "people",
+      name: "name",
       dataset: [
-        {label: 'Вес', data: 'mass', width: 1},
-        {label: 'Рост', data: 'height', width: 2}
-      ]
+        { label: "Вес", data: "mass", width: 1 },
+        { label: "Рост", data: "height", width: 2 },
+      ],
     };
   },
   mixins: [paginationMixin, tableMixin],

@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Транспортные Средства</h1>
-  	<canvas ref="canvas"></canvas>
+    <canvas ref="canvas"></canvas>
     <table>
       <thead>
         <tr>
@@ -59,17 +59,20 @@ export default {
   name: "VehiclesTable",
   data() {
     return {
-      table: 'vehicles',
-      name: 'name',
+      table: "vehicles",
+      name: "name",
       dataset: [
-        {label: 'Цена в кредитах', data: 'cost_in_credits', width: 1},
-        {label: 'Длина', data: 'length', width: 2},
-        {label: 'Максимальная атмосферная скорость', data: 'max_atmosphering_speed', width: 1},
-        {label: 'Экипаж', data: 'crew', width: 2},
-        {label: 'Пассажиры', data: 'passengers', width: 2},
-        {label: 'Грузоподъемность', data: 'cargo_capacity', width: 1},
+        { label: "Цена в кредитах", data: "cost_in_credits", width: 1 },
+        { label: "Длина", data: "length", width: 2 },
+        {
+          label: "Максимальная атмосферная скорость",
+          data: "max_atmosphering_speed",
+          width: 1,
+        },
+        { label: "Экипаж", data: "crew", width: 2 },
+        { label: "Пассажиры", data: "passengers", width: 2 },
+        { label: "Грузоподъемность", data: "cargo_capacity", width: 1 },
       ],
-
     };
   },
   mixins: [paginationMixin, tableMixin],

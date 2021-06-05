@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Фильмы</h1>
-  	<canvas ref="canvas"></canvas>
+    <canvas ref="canvas"></canvas>
     <table>
       <thead>
         <tr>
@@ -24,7 +24,7 @@
           <td>{{ film.director }}</td>
           <td>{{ film.producer }}</td>
           <td>{{ film.release_date }}</td>
-      
+
           <td>{{ film.created | dateFilter("date") }}</td>
           <td>{{ film.edited | dateFilter("date") }}</td>
         </tr>
@@ -50,11 +50,9 @@ export default {
   name: "FilmsTable",
   data() {
     return {
-      table: 'films',
-      name: 'title',
-      dataset: [
-        {label: 'Эпизод', data: 'episode_id', width: 1},
-      ]
+      table: "films",
+      name: "title",
+      dataset: [{ label: "Эпизод", data: "episode_id", width: 1 }],
     };
   },
   mixins: [paginationMixin, tableMixin],

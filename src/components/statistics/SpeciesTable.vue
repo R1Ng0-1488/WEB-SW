@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Разновидности</h1>
-  	<canvas ref="canvas"></canvas>
+    <canvas ref="canvas"></canvas>
     <table>
       <thead>
         <tr>
@@ -33,7 +33,7 @@
           <td>{{ species.average_lifespan }}</td>
           <td>{{ species.homeworld }}</td>
           <td>{{ species.language }}</td>
-   
+
           <td>{{ species.created | dateFilter("date") }}</td>
           <td>{{ species.edited | dateFilter("date") }}</td>
         </tr>
@@ -59,12 +59,16 @@ export default {
   name: "SpeciesTable",
   data() {
     return {
-      table: 'species',
-      name: 'name',
+      table: "species",
+      name: "name",
       dataset: [
-        {label: 'Средний рост', data: 'average_height', width: 1},
-        {label: 'Средняя продолжительность жизни', data: 'average_lifespan', width: 2},
-      ]
+        { label: "Средний рост", data: "average_height", width: 1 },
+        {
+          label: "Средняя продолжительность жизни",
+          data: "average_lifespan",
+          width: 2,
+        },
+      ],
     };
   },
   mixins: [paginationMixin, tableMixin],

@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Планеты</h1>
-  	<canvas ref="canvas"></canvas>
+    <canvas ref="canvas"></canvas>
     <table>
       <thead>
         <tr>
@@ -14,10 +14,9 @@
           <th>Местность</th>
           <th>Поверхность воды</th>
           <th>Население</th>
-     
+
           <th>Создано</th>
           <th>Изменено</th>
-          
         </tr>
       </thead>
 
@@ -32,7 +31,7 @@
           <td>{{ planet.terrain }}</td>
           <td>{{ planet.surface_water }}</td>
           <td>{{ planet.population }}</td>
-  
+
           <td>{{ planet.created | dateFilter("date") }}</td>
           <td>{{ planet.edited | dateFilter("date") }}</td>
         </tr>
@@ -58,15 +57,15 @@ export default {
   name: "PlanetsTable",
   data() {
     return {
-      table: 'planets',
-      name: 'name',
+      table: "planets",
+      name: "name",
       dataset: [
-        {label: 'Диаметр', data: 'diameter', width: 1},
-        {label: 'Орбитальный период', data: 'orbital_period', width: 2},
-        {label: 'Период вращения', data: 'rotation_period', width: 1},
-        {label: 'Поверхность воды', data: 'surface_water', width: 2},
-        {label: 'Население', data: 'population', width: 2},
-      ]
+        { label: "Диаметр", data: "diameter", width: 1 },
+        { label: "Орбитальный период", data: "orbital_period", width: 2 },
+        { label: "Период вращения", data: "rotation_period", width: 1 },
+        { label: "Поверхность воды", data: "surface_water", width: 2 },
+        { label: "Население", data: "population", width: 2 },
+      ],
     };
   },
   mixins: [paginationMixin, tableMixin],

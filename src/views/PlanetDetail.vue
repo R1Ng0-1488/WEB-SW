@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container height">
     <Loader v-if="loading" />
     <div v-else>
       <h2>{{ planet.name }}</h2>
@@ -62,11 +62,6 @@
     </div>
   </div>
 </template>
-<style scoped>
-.container {
-  min-height: 100vh;
-}
-</style>
 <script>
 export default {
   name: "PlanetDetail",
@@ -75,7 +70,7 @@ export default {
     return {
       planet: null,
       loading: true,
-      arr: []
+      arr: [],
     };
   },
   async mounted() {
@@ -86,16 +81,20 @@ export default {
       let url = this.$store.getters.url + `planets/${this.id}/`;
       let response = await fetch(url);
       this.planet = await response.json();
-      this.planet.films = this.getUrls(this.planet.films)
-      this.planet.residents = this.getUrls(this.planet.residents)
+      this.planet.films = this.getUrls(this.planet.films);
+      this.planet.residents = this.getUrls(this.planet.residents);
 
       this.loading = false;
     },
     getUrls(urls) {
-      let arr = []
-      urls.forEach(e => fetch(e).then(res => res.json()).then(data => arr.push(data)))
-      return arr
-    }
+      let arr = [];
+      urls.forEach((e) =>
+        fetch(e)
+          .then((res) => res.json())
+          .then((data) => arr.push(data))
+      );
+      return arr;
+    },
   },
 };
 </script>

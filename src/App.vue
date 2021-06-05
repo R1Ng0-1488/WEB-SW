@@ -7,6 +7,7 @@
 </template>
 <style>
 @import "~materialize-css/dist/css/materialize.min.css";
+@import "assets/static.css";
 </style>
 <script>
 import NavBar from "@/components/NavBar";
